@@ -1,0 +1,55 @@
+{% extends 'hotel/list.html' %}
+
+{% block title_2 %}Lista de habitaciones{% endblock %}
+
+{% block search %}
+    <!-- Sirve para buscar habitaciones. Se pasa a la variable consulta de la vista. -->
+    <div class="py-lg-4">
+        <form action="{% url 'hotel:habitacion_list' %}" method="get">
+            <input name="consulta" type="text" placeholder="Buscar por numero...">
+        </form>
+    </div>
+{% endblock search %}
+
+{% block table_header %}
+    <tr>
+        <th>Numero</th>
+        <th>Precio/dia</th>
+        <th>Disponible</th>
+        <th>Imagen</th>
+        <th></th>
+        {% if user.is_staff %}
+            <th></th>
+            <th></th>
+        {% endif %}
+    </tr>
+{% endblock table_header %}
+     
+{% block table_body %}
+    {% for habitacion in object_list %}
+        <tr>
+            <td>{{ habitacion.numero }}</td>
+            <td>${{ habitacion.precio_x_dia }}</td>
+            <td>{{ habitacion.disponible }}</td>
+            {% if habitacion.imagen %}
+                <td><a href="{{ habitacion.imagen.url }}">Ver imagen</a></td>
+            {% else %}
+                <td>Sin imagen</td>
+            {% endif %}
+            <td>
+                <a href="{% url 'hotel:habitacion_detail' habitacion.id %}" class="btn btn-primary">Ver detalle</a>
+            </td>
+            {% if perms.hotel.change_habitacion %} 
+                <td>
+                    <a href="{% url 'hotel:habitacion_update' habitacion.id %}" class="btn btn-success">Actualizar</a>
+                </td>
+            {% endif %}
+            {% if perms.hotel.delete_habitacion %}
+                <td>
+                    <a href="{% url 'hotel:habitacion_delete' habitacion.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+
+{% endblock table_body %}

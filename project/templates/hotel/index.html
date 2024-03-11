@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block header %}
+    <div class="bg-image d-flex justify-content-center align-items-center div-header fondo-header revelar h-50">
+        <div class="color-header h-100 p-5">
+            {% block title %}
+                <h1 class="fw-bolder display-2 text-white p-5 h1-header revelar">Shipibo Hotel</h1>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-lg-3">
+        
+        <div>
+            <h2 class="fw-bolder display-5 mb-4 revelar">Habitaciones</h2>
+            <div class="d-grid gap-3 my-5 revelar izquierda">
+                <a href="{% url 'hotel:habitacion_list' %}" class="btn btn-dark">Listado de Habitaciones</a>
+            </div>
+
+            <div class="row">
+                {% for habitacion in habitaciones %}
+                    <div class="col-lg-4 col-md-6 col-12 revelar">
+                        <div class="card mb-4">
+                            {% if habitacion.imagen %}
+                                <img class="card-img-top w-100 imagen imagen-tarjeta" src="{{ habitacion.imagen.url }}" alt="Imagen Habitacion {{ habitacion.numero }}">
+                            {% else %}
+                                <img class="card-img-top w-100 imagen imagen-tarjeta" src="{% static 'img/hotel/img-no-disponible.jpg' %}" alt="Imagen Habitacion {{ habitacion.numero }}">
+                            {% endif %}
+                            <div class="card-body">
+                            <h5 class="card-title">Habitacion Nro: {{ habitacion.numero }}</h5>
+                            <p class="card-text">Precio por dia: ${{ habitacion.precio_x_dia }}</p>
+                            <a href="{% url 'hotel:habitacion_detail' habitacion.id %}" class="btn btn-primary">Ver Detalle</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% if user.is_staff %}
+        <div>
+            <h2 class="fw-bolder display-5 my-4 revelar">Tipo de Habitacion</h3>
+            <div class="d-grid gap-3 revelar izquierda">
+                {% if perms.hotel.add_tipohabitacion %}
+                    <a href="{% url 'hotel:tipohabitacion_create' %}" class="btn btn-primary">Crear tipo de Habitacion</a>
+                {% endif %}
+                <a href="{% url 'hotel:tipohabitacion_list' %}" class="btn btn-primary">Ver tipo de Habitaciones</a> <br>
+            </div>
+                
+            <h2 class="fw-bolder display-5 mb-4 revelar">Habitaciones</h3>
+            <div class="d-grid gap-3 revelar derecha">
+                {% if perms.hotel.add_habitacion %}
+                    <a href="{% url 'hotel:habitacion_create' %}" class="btn btn-primary">Crear Habitacion</a>
+                {% endif %}
+                <a href="{% url 'hotel:habitacion_list' %}" class="btn btn-primary">Ver Habitaciones</a> <br>
+            </div>
+                    
+            <h2 class="fw-bolder display-5 mb-4 revelar">Reservas</h3>
+            <div class="d-grid gap-3 revelar izquierda">
+                <a href="{% url 'hotel:reserva_create' %}" class="btn btn-primary">Crear Reserva</a>
+                <a href="{% url 'hotel:reserva_list' %}" class="btn btn-primary">Ver Reservas</a> <br>
+            </div>
+        </div>
+        {% elif user.is_authenticated and not user.is_staff %}
+            <div>
+                <h2 class="fw-bolder display-5 my-4 revelar">Reservas</h3>
+                    <div class="d-grid gap-3 mb-5 revelar derecha">
+                        <a href="{% url 'hotel:reserva_create' %}" class="btn btn-primary">Reservar</a>
+                        <a href="{% url 'hotel:reserva_list' %}" class="btn btn-primary">Mis Reservas</a> 
+                    </div>
+            </div>
+        {% endif %}
+        
+        {% url 'home:index' as url %}
+        {% include 'index_back.html' with link=url %}
+    </div>
+{% endblock content %}
+
+    
+    

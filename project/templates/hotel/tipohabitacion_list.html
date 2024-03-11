@@ -1,0 +1,45 @@
+{% extends 'hotel/list.html' %}
+
+{% block title_2 %}Lista de tipo de habitaciones{% endblock %}
+{% block search %}
+    <!-- Sirve para buscar tipos de habitacion. Se pasa a la variable consulta de la vista. -->
+    <div class="py-lg-4">
+        <form action="{% url 'hotel:tipohabitacion_list' %}" method="get">
+            <input name="consulta" type="text" placeholder="Buscar...">
+        </form>
+    </div>
+{% endblock search %}
+       
+{% block table_header %}
+    <tr>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th></th>
+        {% if user.is_staff %}
+            <th></th>
+            <th></th>
+        {% endif %}
+    </tr>
+{% endblock table_header %}
+     
+{% block table_body %}
+    {% for tipo_habitacion in object_list %}
+        <tr>
+            <td>{{ tipo_habitacion.nombre }}</td>
+            <td>{{ tipo_habitacion.descripcion|truncatechars:10 }}</td>
+            <td>
+                <a href="{% url 'hotel:tipohabitacion_detail' tipo_habitacion.id %}" class="btn btn-primary">Ver detalle</a>
+            </td>
+            {% if perms.hotel.change_tipohabitacion %} 
+                <td>
+                    <a href="{% url 'hotel:tipohabitacion_update' tipo_habitacion.id %}" class="btn btn-success">Actualizar</a>
+                </td>
+            {% endif %}
+            {% if perms.hotel.delete_tipohabitacion %}
+                <td>
+                    <a href="{% url 'hotel:tipohabitacion_delete' tipo_habitacion.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+{% endblock table_body %}

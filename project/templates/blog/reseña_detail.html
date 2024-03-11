@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% load custom_filters %}
+
+{% block content %}
+    <h2 class="fw-bolder display-5 mb-4">Detalle de Reseña</h2>
+
+    <div class="d-grid gap-3">
+        <div class="card mb-4">
+            
+            <div class="card-body">
+                <h3 class="card-title border-bottom">{{ object.titulo}}</h2>
+                <p class="small text-muted">{{ object.fecha}} por <strong>{{ object.autor}}</strong></p>
+                <p class="card-text"><strong>Calificacion:</strong> 
+                    {{ object.calificacion|calificacion_estrellas }}
+                <p class="card-text">{{ object.contenido }}</p>
+            </div>
+            {% if object.imagen %}
+                <img src="{{ object.imagen.url }}" class="card-img-bottom border-top imagen imagen-post" alt="Imagen reseña">
+            {% endif %}
+        </div>
+        {% url 'blog:reseña_list' as url %}
+        {% include 'index_back.html' with link=url %}
+    </div>
+{% endblock content %}
+

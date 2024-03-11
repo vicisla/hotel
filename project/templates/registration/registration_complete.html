@@ -1,0 +1,22 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Correo electrónico de activación enviado" %}{% endblock %}
+
+{% block content %}
+    <p class="alert alert-success">
+        {% trans "Por favor, verifica tu correo electrónico, {{ request.session.registration_email }}, para completar el proceso de registro." %}
+    </p>
+    {% url 'home:index' as url %}
+    {% include 'index_back.html' with link=url %}
+{% endblock %}
+
+
+{% comment %}
+**registration/registration_complete.html**
+
+Used after successful completion of the registration form. This
+template has no context variables of its own, and should simply inform
+the user that an email containing account-activation information has
+been sent.
+{% endcomment %}

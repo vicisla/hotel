@@ -1,0 +1,35 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block title %}{% trans "Reenviar correo electrónico de activación" %}{% endblock %}
+
+{% block content %}
+<form method="post" action="">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field|add_class:"form-control" }}
+        </div>
+    {% endfor %}
+    <div class="d-grid gap-3 mt-4">
+        <button type="submit" class="btn btn-success">{% trans 'Aceptar' %}</button>
+    </div>
+</form>
+{% url 'home:index' as url %}
+{% include 'index_back.html' with link=url %}
+{% endblock %}
+
+
+{% comment %}
+**registration/resend_activation_form.html**
+Used to show the form users will fill out to resend the activation email. By
+default, has the following context:
+
+``form``
+    The registration form. This will be an instance of some subclass
+    of ``django.forms.Form``; consult `Django's forms documentation
+    <http://docs.djangoproject.com/en/dev/topics/forms/>`_ for
+    information on how to display this in a template.
+{% endcomment %}

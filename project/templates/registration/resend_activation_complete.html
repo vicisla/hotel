@@ -1,0 +1,24 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Reenvío de activación de cuenta" %}{% endblock %}
+
+{% block content %}
+<p class="alert alert-success">
+  {% blocktrans %}
+  Hemos enviado un correo electrónico a {{ email }} con instrucciones adicionales.
+  {% endblocktrans %}
+</p>
+{% url 'home:index' as url %}
+{% include 'index_back.html' with link=url %}
+{% endblock %}
+
+
+{% comment %}
+**registration/resend_activation_complete.html**
+Used after form for resending account activation is submitted. By default has
+the following context:
+
+``email``
+    The email address submitted in the resend activation form.
+{% endcomment %}

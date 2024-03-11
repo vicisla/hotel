@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2 class="fw-bolder display-5 mb-4">Detalle de tipo de habitacion</h2>
+
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Nombre:</strong> {{ object.nombre }}</li>
+        <li class="list-group-item"><strong>Detalle:</strong> {{ object.descripcion }}</li>
+    </ul>
+
+    {% url 'hotel:tipohabitacion_list' as url %}
+    {% include 'index_back.html' with link=url %}
+{% endblock content %}

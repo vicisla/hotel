@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2 class="fw-bolder display-5 mb-4">Informacion de perfil</h2>
+
+    <ul class="list-group">
+        {% if object.avatar %}
+            <li class="list-group-item">
+                <strong>Avatar:</strong><br>
+                <img src="{{ object.avatar.url }}" alt="Avatar" class="mt-3" style="height: 400px; width: 400px; object-fit: cover;">
+            </li>
+        {% else %}
+            <li class="list-group-item"><strong>Avatar:</strong> Sin imagen</li>
+        {% endif %}
+        <li class="list-group-item"><strong>Usuario:</strong> {{ object.usuario }}</li>
+        <li class="list-group-item"><strong>Nacimiento:</strong> {{ object.nacimiento }}</li>
+        <li class="list-group-item"><strong>Pais:</strong> {{ object.pais }}</li>
+        <li class="list-group-item"><strong>Provincia:</strong> {{ object.provincia }}</li>
+        <li class="list-group-item"><strong>Ciudad:</strong> {{ object.ciudad }}</li>
+        <li class="list-group-item"><strong>Domicilio:</strong> {{ object.domicilio }}</li>
+        <li class="list-group-item"><strong>Codigo postal:</strong> {{ object.codigo_postal }}</li>
+        <li class="list-group-item"><strong>Telefono:</strong> {{ object.telefono }}</li>
+        <li class="list-group-item"><strong>DNI:</strong> {{ object.dni }}</li>
+        <li class="list-group-item"><strong>CUIT:</strong> {{ object.cuit }}</li>
+    </ul>
+    {% url 'hotel:index' as url %}
+    {% include 'index_back.html' with link=url %}
+{% endblock content %}

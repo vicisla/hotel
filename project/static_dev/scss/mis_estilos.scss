@@ -1,0 +1,108 @@
+@import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Varela Round', sans-serif;
+}
+
+
+// Navbar
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+.icono-avatar{
+    height: 30px; 
+    width: 30px; 
+    border-radius: 50%; 
+    object-fit: $object-fit-img;
+    background-color: $fondo-icono;
+}
+
+
+// Header
+
+.div-header{
+    width: 100vw; 
+    background-position: center; 
+    background-size: cover;
+}
+.header-home{
+    height:85vh;
+}
+.h1-header{
+    width: 100vw; 
+    text-align: center;
+}
+.fondo-header{
+    background-image: $fondo-header;
+}
+.fondo-1{
+    background-image: url('https://images.pexels.com/photos/1838554/pexels-photo-1838554.jpeg');
+}
+.color-header{
+    background-color: rgba(0, 0, 0, 0.4);
+}
+// Imagenes de habitaciones y reseñas
+.imagen{
+    object-fit: $object-fit-img;
+}
+.imagen-tarjeta{
+    height: 230px;
+}
+.imagen-habitacion{
+    height: 400px;
+    width: 400px; 
+}
+.imagen-post{
+    height: 400px; 
+}
+
+
+// Botones bootstrap
+.btn{
+    box-shadow: $sombra;
+}
+//primary
+.btn-primary {
+    background-color: $color-primary-1;
+    border-color: $color-primary-1;
+}
+.btn-primary:hover {
+    background-color: $color-primary-2;
+    border-color: $color-primary-2;
+}
+.btn-primary:active {
+    background-color: $color-primary-3;
+    border-color: $color-primary-3;
+} 
+//success
+.btn-success {
+    background-color: $color-success-1;
+    border-color: $color-success-1;
+}
+.btn-success:hover {
+    background-color: $color-success-2;
+    border-color: $color-success-2;
+}
+.btn-success:active {
+    background-color: $color-success-3;
+    border-color: $color-success-3;
+}
+//danger
+.btn-danger {
+    background-color: $color-danger-1;
+    border-color: $color-danger-1;
+}
+.btn-danger:hover {
+    background-color: $color-danger-2;
+    border-color: $color-danger-2;
+}
+.btn-danger:active {
+    background-color: $color-danger-3;
+    border-color: $color-danger-3;
+}

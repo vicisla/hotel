@@ -1,0 +1,10 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "La registración está cerrada" %}{% endblock %}
+
+{% block content %}
+<p class="alert alert-danger">{% trans "Lo siento, pero el registro está cerrada en este momento. Vuelve más tarde." %}</p>
+{% url 'home:index' as url %}
+{% include 'index_back.html' with link=url %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <h2 class="fw-bolder display-5 mb-4">Reseñas</h2>
+    
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field|add_class:"form-control" }}
+            </div>
+        {% endfor %}
+        <div class="d-grid gap-3 mt-4">
+            <button type="submit" class="btn btn-success">Enviar</button>
+        </div>
+    </form>
+    {% url 'blog:index' as url %}
+    {% include 'index_back.html' with link=url %}
+{% endblock content %}

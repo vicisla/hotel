@@ -1,0 +1,48 @@
+{% extends 'hotel/list.html' %}
+
+{% block title_2 %}Lista de reservas{% endblock %}
+
+{% block search %}
+    <!-- Sirve para buscar reservas. Se pasa a la variable consulta de la vista. -->
+    <div class="py-lg-4">
+        <form action="{% url 'hotel:reserva_list' %}" method="get">
+            <input name="consulta" type="text" placeholder="Buscar por clientes...">
+        </form>
+    </div>
+{% endblock search %}
+
+{% block table_header %}
+    <tr>
+        <th>Cliente</th>
+        <th>Habitacion</th>
+        <th>Fecha de entrada</th>
+        <th>Fecha de salida</th>
+        <th>Total</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+{% endblock table_header %}
+     
+{% block table_body %}
+    {% for reserva in object_list %}
+        <tr>
+            <td>{{ reserva.cliente }}</td>
+            <td>{{ reserva.habitacion }}</td>
+            <td>{{ reserva.fecha_entrada }}</td>
+            <td>{{ reserva.fecha_salida }}</td>
+            <td>${{ reserva.precio_total }}</td>
+            <td>
+                <a href="{% url 'hotel:reserva_detail' reserva.id %}" class="btn btn-primary">Ver detalle</a>
+            </td>
+            <td>
+                <a href="{% url 'hotel:reserva_update' reserva.id %}" class="btn btn-success">Actualizar</a>
+            </td>
+            <td>
+                <a href="{% url 'hotel:reserva_delete' reserva.id %}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+    {% endfor %}
+
+{% endblock table_body %}
+

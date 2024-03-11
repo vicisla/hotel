@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+    <div class="bg-image d-flex justify-content-center align-items-center div-header fondo-header revelar h-50">
+        <div class="color-header h-100 p-5">
+            {% block title %}
+                <h1 class="fw-bolder display-2 text-white p-5 h1-header revelar">Blog Shipibo Hotel</h1>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-lg-3">
+        <h2 class="fw-bolder display-5 mb-4 revelar">Deja tu reseña del hotel!</h3>
+        <div class="d-grid gap-3 revelar izquierda">
+            <a href="{% url 'blog:reseña_create' %}" class="btn btn-primary">Crear Reseña</a>
+            <a href="{% url 'blog:reseña_list' %}" class="btn btn-primary mb-5">Ver Reseñas</a>
+        </div>  
+    </div>
+
+        {% url 'home:index' as url %}
+        {% include 'index_back.html' with link=url %}
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2 class="fw-bolder display-5 mb-4">Detalle de reserva</h2>
+
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Cliente:</strong> {{ object.cliente }}</li>
+        <li class="list-group-item"><strong>Habitacion:</strong> {{ object.habitacion }}</li>
+        <li class="list-group-item"><strong>Fecha de entrada:</strong> {{ object.fecha_entrada }}</li>
+        <li class="list-group-item"><strong>Fecha de salida:</strong> {{ object.fecha_salida }}</li>
+        <li class="list-group-item"><strong>Precio total:</strong> ${{ object.precio_total }}</li>
+    </ul>
+
+    {% url 'hotel:reserva_list' as url %}
+    {% include 'index_back.html' with link=url %}
+    
+{% endblock content %}

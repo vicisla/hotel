@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "variables.css",
+	"sources": [
+		"../scss/variables.scss"
+	],
+	"sourcesContent": [
+		"$fondo-h1: rgba(0,0,0,0.4);\r\n$fondo-header: url('https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg');\r\n$fondo-icono: rgb(218, 217, 217);\r\n$object-fit-img: cover;\r\n$sombra: 0 3px 2px -2px #ccc, 0 4px 5px 1px #ccc, 0 2px 7px 1px #ccc;\r\n$color-primary-1: #0059b3cc;\r\n$color-primary-2: #004d99cc;\r\n$color-primary-3: #004080cc;\r\n$color-success-1: #31866d;\r\n$color-success-2: #2b7560;\r\n$color-success-3: #256453;\r\n$color-danger-1: #B22222;\r\n$color-danger-2: #9B1B1B;\r\n$color-danger-3: #841313;\r\n"
+	],
+	"names": [],
+	"mappings": ""
+}

@@ -1,0 +1,63 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
+    <div class="container-fluid p-1">
+        <a class="navbar-brand" href="{% url 'home:index' %}">Shipibo Hotel</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home:index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/hotel/' %}active{% endif %}" href="{% url 'hotel:index' %}">Hotel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/blog/' %}active{% endif %}" href="{% url 'blog:index' %}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/contacto/' %}active{% endif %}" href="{% url 'contacto:index' %}">Contacto</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-info" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ user.username }}
+                            {% if user.infousuario.avatar %}
+                                <img src="{{ user.infousuario.avatar.url }}" class="icono-avatar" alt="Avatar">
+                            {% else %}
+                                <img src="{% static 'img/usuarios/user.png' %}" class="icono-avatar" alt="avatar">
+                            {% endif %}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                            {% if not user.infousuario %}
+                                <li><a class="dropdown-item" href="{% url 'usuarios:infousuario_create' %}">Cargar Perfil</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href="{% url 'usuarios:infousuario_detail' user.infousuario.pk %}">Ver Perfil</a></li>
+                                <li><a class="dropdown-item" href="{% url 'usuarios:infousuario_update' user.infousuario.pk %}">Actualizar Perfil</a></li>
+                                <li><a class="dropdown-item" href="{% url 'usuarios:infousuario_delete' user.infousuario.pk %}">Eliminar Perfil</a></li>
+
+                            {% endif %}
+                          <li><a class="dropdown-item" href="{% url 'auth_password_change' %}">Cambiar contraseña</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li>
+                            <form action="{% url 'auth_logout' %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
+                          </li>
+                      </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/accounts/login/' %}active{% endif %}" href="{% url 'auth_login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/accounts/register/' %}active{% endif %}" href="{% url 'registration_register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

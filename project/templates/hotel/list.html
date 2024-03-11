@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    {% include 'messages.html' %} 
+    <h2 class="fw-bolder display-5 mb-4">{% block title_2 %}{% endblock %}</h2>       
+
+    {% if object_list %}
+
+        {% block search %}{% endblock search %}
+ 
+        {% block list %}
+            <div class="container">
+                <table class="table">
+                    <thead>
+                        {% block table_header %}
+                        {% endblock table_header %}
+                    </thead>
+                    <tbody>
+                        {% block table_body %}
+                        {% endblock table_body %}
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-5 fw-semibold text-center">Total: {{ object_list | length }}</p>
+        {% endblock list %}
+    {% else %}
+        <p class="fs-4 fst-italic">No hay registros ingresados</p>
+    {% endif %}
+
+    
+    {% url 'hotel:index' as url %}
+    {% include 'index_back.html' with link=url %}
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+{% load custom_filters %}
+
+{% block content %}
+    {% include 'messages.html' %}
+    <h2 class="fw-bolder display-5 mb-4">Reseñas</h3>
+    {% if object_list %}
+        <!-- Sirve para buscar habitaciones. Se pasa a la variable consulta de la vista. -->
+        <div class="py-lg-4">
+            <form action="{% url 'blog:reseña_list' %}" method="get">
+                <input name="consulta" type="text" placeholder="Buscar...">
+            </form>
+        </div>
+
+        {% for resena in object_list %}
+            <div class="d-grid gap-3 revelar">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title border-bottom">{{ resena.titulo}}</h2>
+                        <p class="small text-muted">{{ resena.fecha}} por <strong>{{ resena.autor}}</strong></p>
+                        <p class="card-text"><strong>Calificacion:</strong> 
+                            {{ resena.calificacion|calificacion_estrellas }}
+                        </p>
+                        <p class="card-text">{{ resena.contenido|truncatechars:150 }}</p>
+
+                        <a href="{% url 'blog:reseña_detail' resena.id %}" class="btn btn-primary">Leer mas</a>
+                        {% if resena.autor == user %}
+                            <a href="{% url 'blog:reseña_update' resena.id %}" class="btn btn-success">Actualizar</a>
+                        {% endif %}
+                        {% if resena.autor == user or perms.blog.delete_reseña%}
+                            <a href="{% url 'blog:reseña_delete' resena.id %}" class="btn btn-danger">Eliminar</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        
+        <p class="mt-5 fw-semibold text-center">Total: {{ object_list | length }}</p>
+    {% else %}
+        <p class="fs-4 fst-italic">No hay registros ingresados</p>
+    {% endif %}
+
+    {% url 'blog:index' as url %}
+    {% include 'index_back.html' with link=url %}
+{% endblock content %}
+
+
+
